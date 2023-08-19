@@ -1,36 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const Contact = () => {
-const [user, setUser]=useState({
-  name: " ",
-  email: " ",
-  Message: " ",
-});
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-let name,value;
-const PostUserData = (event)=>{
-  name= event.target.name;
-  value= event.target.value;
+  const PostUserData = (event) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
 
-  setUser({ ...user, [name]:value});
+  const submitData = async (event) => {
+    event.preventDefault();
+    const { name, email, message } = user;
+    const response = await fetch('https://portfolio-a22d7-default-rtdb.firebaseio.com/userDataRecord.json', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name, email, message
+      }),
+    });
 
-};
-
-const submitData =(event)=>{
-  event.preventDefault();
-  const{name,email,message}=user;
-  fetch('https://portfolio-a22d7-default-rtdb.firebaseio.com/userDataRecord.json',{
-   method:"POST",
-   headers:{
-    "Content-Type" :"application/json",
-   },
-   body:JSON.stringify({
-    name,email,message
-   }),
-  }
-  );
- 
-    if (Response) {
+    if (response.ok) {
       setUser({
         name: "",
         email: "",
@@ -40,8 +35,7 @@ const submitData =(event)=>{
     } else {
       alert('Failed to submit data. Please try again.');
     }
-  
-};
+  };
 
   return (
     <div>
@@ -57,10 +51,21 @@ const submitData =(event)=>{
       <div class="lg:w-1/2 md:w-2/3 mx-auto">
         <div class="flex flex-wrap -m-2">
           <div class="p-2 w-1/2">
-            <div class="relative">
-              <label for="name" class="leading-7 text-sm text-pink-600 font-bold">Name</label>
-              <input type="text" id="name" name="name" placeholder='John Doe' value={user.name} onChange={PostUserData} class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
-            </div>
+          <div class="relative">
+  {/* <label for="name" class="leading-7 text-sm text-pink-600 font-bold">Name</label>
+  <input
+    type="text"
+    id="name"
+    name="name"
+    placeholder="John Doe" 
+    value={user.name}
+    onChange={PostUserData}
+    class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+  /> */}
+    <label for="name" class="leading-7 text-sm text-pink-600 font-bold">Name</label>
+              <input type="text" id="name" name="name" placeholder='John Doe' value={user.name}  onChange={PostUserData} class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"></input>
+</div>
+
           </div>
           <div class="p-2 w-1/2">
             <div class="relative">
