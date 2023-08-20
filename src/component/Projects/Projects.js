@@ -30,7 +30,7 @@ const Projects = () => {
               <h2 class="tracking-widest text-sm title-font font-medium text-pink-500 mb-1">HTML, CSS, JS, Bootstrap</h2>
               <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Portfolio Website</h1>
               <a href="http://drsmitanirkhi.com/" target="_blank"><p class="leading-relaxed hover:text-pink-600 hover:font-bold">www.drsmitanirkhi.com</p></a>
-              <p class="leading-relaxed"></p>
+              <p class="leading-relaxed">Display your projects, designs, and accomplishments in one place to impress potential employers and clients.</p>
             </div>
           </div>
         </div>
